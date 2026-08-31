@@ -5,6 +5,9 @@ import { dummySkills } from "#/lib/dummy-skills";
 
 export const Route = createFileRoute("/")({ component: App });
 
+/**
+ * Renders the registry homepage with navigation actions and recently created skills.
+ */
 function App() {
 	return (
 		<div id="home">
