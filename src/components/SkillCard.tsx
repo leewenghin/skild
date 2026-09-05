@@ -8,12 +8,14 @@ import {
 	Copy,
 	MessageSquare,
 } from "lucide-react";
-import { useState } from "react";
 import type { GetSkillsData } from "#/dataconnect-generated";
+import { useCopyInstallCommand } from "#/lib/use-copy-install-command";
+import { getSkillCategory } from "#/lib/utils";
 
 type SkillCardProp = GetSkillsData["skills"][number];
 
 const Component = ({
+	id,
 	createdAt,
 	description,
 	installCommand,
@@ -22,29 +24,18 @@ const Component = ({
 	author,
 }: SkillCardProp) => {
 	const posthog = usePostHog();
-	const [copied, setCopied] = useState(false);
-
-	const category = tags[0] ?? "General";
-
-	const handleCopy = async () => {
-		try {
-			await navigator.clipboard.writeText(installCommand);
-			setCopied(true);
-			setTimeout(() => setCopied(false), 2000);
-			posthog.capture("install_command_copied", {
-				skill_title: title,
-				skill_category: category,
-				install_command: installCommand,
-			});
-		} catch {
-			setCopied(false);
-		}
-	};
+	const category = getSkillCategory(tags);
+	const { copied, handleCopy } = useCopyInstallCommand(installCommand, {
+		skillId: id,
+		skillTitle: title,
+		skillCategory: category,
+	});
 
 	return (
 		<article className="skill-card">
 			<Link
-				to="/skills"
+				to="/skills/$skillId"
+				params={{ skillId: id }}
 				tabIndex={-1}
 				aria-label={`Open ${title}`}
 				className="overlay"
@@ -83,7 +74,11 @@ const Component = ({
 				</div>
 
 				<div className="summary">
-					<Link to="/skills" className="title-link">
+					<Link
+						to="/skills/$skillId"
+						params={{ skillId: id }}
+						className="title-link"
+					>
 						<h3>{title}</h3>
 					</Link>
 
@@ -120,11 +115,13 @@ const Component = ({
 
 					<div className="actions">
 						<Link
-							to="/skills"
+							to="/skills/$skillId"
+							params={{ skillId: id }}
 							className="open"
 							title={`Open ${title}`}
 							onClick={() =>
 								posthog.capture("skill_opened", {
+									skill_id: id,
 									skill_title: title,
 									skill_category: category,
 								})
