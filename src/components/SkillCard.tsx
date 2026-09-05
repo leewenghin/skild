@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+const dateFormatter = new Intl.DateTimeFormat("en-US", { timeZone: "UTC" });
+
 const Component = ({
 	authorEmail,
 	category,
@@ -67,7 +69,7 @@ const Component = ({
 							<p>{author.username}</p>
 							<p>
 								{createdAt
-									? new Date(createdAt).toLocaleDateString()
+									? dateFormatter.format(new Date(createdAt))
 									: "Unknown date"}
 							</p>
 						</div> */}
@@ -80,7 +82,7 @@ const Component = ({
 							<p>Dom</p>
 							<p>
 								{createdAt
-									? new Date(createdAt).toLocaleDateString()
+									? dateFormatter.format(new Date(createdAt))
 									: "Unknown date"}
 							</p>
 						</div>
