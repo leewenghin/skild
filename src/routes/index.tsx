@@ -1,28 +1,12 @@
 import { usePostHog } from "@posthog/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
 import { Terminal } from "lucide-react";
 import { SkillCard } from "#/components";
-import { getSkills } from "#/dataconnect-generated";
-import { dataConnect } from "#/lib/firebase";
-
-const getSkillFn = createServerFn({ method: "GET" }).handler(async () => {
-	try {
-		const { data } = await getSkills(dataConnect, {
-			searchTerm: "",
-			limit: 10,
-		});
-
-		return data.skills;
-	} catch (error) {
-		console.error(error);
-		return [];
-	}
-});
+import { getSkillsFn } from "#/lib/skills";
 
 export const Route = createFileRoute("/")({
 	component: App,
-	loader: () => getSkillFn(),
+	loader: () => getSkillsFn({ data: 10 }),
 });
 
 function App() {
