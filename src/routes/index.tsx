@@ -4,11 +4,11 @@ import { createServerFn } from "@tanstack/react-start";
 import { Terminal } from "lucide-react";
 import { SkillCard } from "#/components";
 import { getSkills } from "#/dataconnect-generated";
-import { dataConnect } from "#/lib/firebase";
+import { getDataConnectInstance } from "#/lib/firebase";
 
 const getSkillFn = createServerFn({ method: "GET" }).handler(async () => {
 	try {
-		const { data } = await getSkills(dataConnect, {
+		const { data } = await getSkills(getDataConnectInstance(), {
 			searchTerm: "",
 			limit: 10,
 		});
