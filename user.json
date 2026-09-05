@@ -1,0 +1,96 @@
+{
+  "id": "user_3ItgysJisl8Vb7FbzdE2nbAmbFu",
+  "object": "user",
+  "username": null,
+  "first_name": "Dominic",
+  "last_name": null,
+  "locale": null,
+  "image_url": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zSWdDZGlHR05vS0tjbWJJbldDZGpyaW5scGEiLCJyaWQiOiJ1c2VyXzNJdGd5c0ppc2w4VmI3RmJ6ZEUybmJBbWJGdSIsImluaXRpYWxzIjoiRCJ9",
+  "has_image": false,
+  "primary_email_address_id": "idn_3ItgyW7NqzjRpMGG1TJ4ZYwViGG",
+  "primary_phone_number_id": null,
+  "primary_web3_wallet_id": null,
+  "password_enabled": false,
+  "two_factor_enabled": false,
+  "totp_enabled": false,
+  "backup_code_enabled": false,
+  "email_addresses": [
+    {
+      "id": "idn_3ItgyW7NqzjRpMGG1TJ4ZYwViGG",
+      "object": "email_address",
+      "email_address": "dominicleewenghin@gmail.com",
+      "reserved": false,
+      "verification": {
+        "object": "verification_from_oauth",
+        "status": "verified",
+        "strategy": "from_oauth_google",
+        "attempts": null,
+        "expire_at": null
+      },
+      "linked_to": [
+        {
+          "type": "oauth_google",
+          "id": "idn_3ItgyblkavjWJeYI0ByEAtoq1DV"
+        }
+      ],
+      "matches_sso_connection": false,
+      "created_at": 1788589533262,
+      "updated_at": 1788589536477
+    }
+  ],
+  "phone_numbers": [],
+  "web3_wallets": [],
+  "passkeys": [],
+  "external_accounts": [
+    {
+      "object": "external_account",
+      "id": "eac_3Itgyc8jh37Dcn27J8hbTJUPD3d",
+      "provider": "oauth_google",
+      "identification_id": "idn_3ItgyblkavjWJeYI0ByEAtoq1DV",
+      "provider_user_id": "117308912923652146709",
+      "approved_scopes": "email https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid profile",
+      "email_address": "dominicleewenghin@gmail.com",
+      "email_address_verified": true,
+      "first_name": "Dominic",
+      "last_name": "",
+      "avatar_url": "",
+      "username": "",
+      "phone_number": "",
+      "public_metadata": {},
+      "label": null,
+      "created_at": 1788589533252,
+      "updated_at": 1788592279708,
+      "verification": {
+        "object": "verification_oauth",
+        "status": "verified",
+        "strategy": "oauth_google",
+        "attempts": null,
+        "expire_at": 1788590127962
+      }
+    }
+  ],
+  "saml_accounts": [],
+  "enterprise_accounts": [],
+  "password_last_updated_at": null,
+  "public_metadata": {},
+  "private_metadata": {},
+  "unsafe_metadata": {},
+  "external_id": null,
+  "last_sign_in_at": 1788592279771,
+  "banned": false,
+  "locked": false,
+  "lockout_expires_in_seconds": null,
+  "verification_attempts_remaining": 10,
+  "created_at": 1788589536453,
+  "updated_at": 1788592279774,
+  "delete_self_enabled": true,
+  "bypass_client_trust": false,
+  "create_organization_enabled": true,
+  "last_active_at": 1788589536453,
+  "mfa_enabled_at": null,
+  "mfa_disabled_at": null,
+  "legal_accepted_at": null,
+  "requires_password_reset": false,
+  "deprovisioned": false,
+  "profile_image_url": "https://www.gravatar.com/avatar?d=mp"
+}
