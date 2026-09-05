@@ -1,0 +1,85 @@
+I0905 16:43:07.048578   49724 load.go:31] Reloading schema and connectors...
+I0905 16:43:07.069977   49724 control.go:100] [projects/emulator/locations/emulator/services/skild-5f4c0-service f63c] UpdateResources(): done
+Main schema: sources: schema\schema.gql [544B] 
+Connector "example": sources: 
+E0905 16:43:07.074098   49724 load.go:95] Errors generating SDK: [connector "example"]: invalid Data Connect Connector no query found in connector
+I0905 16:43:07.075641   49724 collector.go:107] schema extensions wrote into "C:\\dev\\next.js\\skild\\dataconnect\\.dataconnect\\schema"
+Generated sources: main\input.gql [16145B] main\relation.gql [6578B] main\query.gql [2404B] main\mutation.gql [6444B] main\implicit.gql [266B] prelude.gql [84995B] 
+I0905 16:43:07.075641   49724 load.go:109] Finished reloading
+I0905 16:43:07.076161   49724 dev.go:103] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I0905 16:43:07.076671   49724 dev.go:103] Listening on address (HTTP + gRPC): [::1]:9399
+I0905 16:43:17.962253   49724 migrate.go:24] Running migration SQL:
+Step 1: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+Step 2: CREATE TABLE "public"."user" ("clerk_id" text NOT NULL, "email" text NOT NULL, "image_url" text NULL, "username" text NULL, PRIMARY KEY ("clerk_id"))
+Step 3: CREATE UNIQUE INDEX "user_clerkId_uidx" ON "public"."user" ("clerk_id")
+Step 4: CREATE TABLE "public"."skill" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "author_clerk_id" text NOT NULL, "created_at" timestamptz NOT NULL, "description" text NOT NULL, "install_command" text NOT NULL, "prompt_config" text NOT NULL, "tags" text[] NOT NULL, "title" text NOT NULL, "usage_example" text NOT NULL, PRIMARY KEY ("id"), CONSTRAINT "skill_author_clerk_id_fkey" FOREIGN KEY ("author_clerk_id") REFERENCES "public"."user" ("clerk_id") ON DELETE CASCADE)
+Step 5: CREATE INDEX "skill_authorClerkId_idx" ON "public"."skill" ("author_clerk_id")
+I0905 16:43:18.065904   49724 control.go:100] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] UpdateResources(): done
+Main schema: sources: schema\schema.gql [544B] 
+Connector "example": sources: 
+I0905 16:43:18.069104   49724 configure_emulator.go:21] ConfigureEmulator successed
+Request: service_id:  "skild-5f4c0-service"
+connection_string:  "postgres://127.0.0.1:5432/skild-5f4c0-database?sslmode=disable"
+database:  "skild-5f4c0-database"
+
+Response: 
+I0905 16:43:25.304106   49724 execute.go:57] Database ping is quick (likely cached), took 504.3µs
+I0905 16:43:25.309533   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+I0905 16:43:33.194005   49724 execute.go:57] Database ping is quick (likely cached), took 11.6068ms
+I0905 16:43:33.196207   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+I0905 16:43:43.143659   49724 execute.go:57] Database ping is quick (likely cached), took 521.7µs
+I0905 16:43:43.145948   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+I0905 16:44:10.591718   49724 execute.go:57] Database ping is quick (likely cached), took 767.2µs
+I0905 16:44:10.593529   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+I0905 16:44:11.974337   49724 execute.go:57] Database ping is quick (likely cached), took 716.9µs
+I0905 16:44:11.976618   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+W0905 16:44:23.890095   49724 engine.go:207] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : failed with explicit status error: rpc error: code = PermissionDenied desc = unauthorized: you are not authorized to perform this operation. 
+Auth: admin impersonating user of {"UID":"exampleUserId","Token":{"email_verified":true,"sub":"exampleUserId"}}
+Status: code:7  message:"unauthorized: you are not authorized to perform this operation"
+Errors: [message:"@auth rejected the request"  extensions:{code:PERMISSION_DENIED  debug_details:"@auth(level: NO_ACCESS) always reject non-admin requests"}]
+sources: input [171B] 
+W0905 16:44:28.520561   49724 engine.go:207] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : failed with explicit status error: rpc error: code = PermissionDenied desc = unauthorized: you are not authorized to perform this operation. 
+Auth: public
+Status: code:7  message:"unauthorized: you are not authorized to perform this operation"
+Errors: [message:"@auth rejected the request"  extensions:{code:PERMISSION_DENIED  debug_details:"@auth(level: NO_ACCESS) always reject non-admin requests"}]
+sources: input [171B] 
+I0905 16:44:32.870566   49724 execute.go:57] Database ping is quick (likely cached), took 505.6µs
+I0905 16:44:32.871655   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+I0905 16:44:37.210969   49724 execute.go:57] Database ping is quick (likely cached), took 443.7µs
+I0905 16:44:37.212449   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+I0905 16:44:37.948950   49724 execute.go:57] Database ping is quick (likely cached), took 435.1µs
+I0905 16:44:37.950478   49724 engine.go:209] [projects/emulator/locations/emulator/services/skild-5f4c0-service 2252] ExecuteGraphql query : succeeded. 
+E0905 16:47:47.076153   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:47:57.076629   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:48:07.076650   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:48:17.075993   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:48:27.077066   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:48:37.077175   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:48:47.076378   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:48:57.196659   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:49:07.075972   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:49:17.075770   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:49:27.077123   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:49:37.127261   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:49:47.076943   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:49:57.076546   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:50:07.075977   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:50:17.076930   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:50:27.076580   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:50:37.077055   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:50:47.075841   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:50:57.093945   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:51:07.076407   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:51:17.075827   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:51:27.081764   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:51:37.076339   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:51:47.076261   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:51:57.076191   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:52:07.076750   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:52:17.075846   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:52:27.077027   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:52:37.076326   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:52:47.076039   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:52:57.075799   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:53:07.075856   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
+E0905 16:53:17.076570   49724 watch.go:40] Failed to load config from "C:\\dev\\next.js\\skild\\dataconnect": could not read connector.yaml at `C:\dev\next.js\skild\dataconnect\example\connector.yaml`: open C:\dev\next.js\skild\dataconnect\example\connector.yaml: The system cannot find the path specified.
