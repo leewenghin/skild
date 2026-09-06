@@ -73,7 +73,12 @@ const Component = ({
 							<p>{author.username}</p>
 							<p>
 								{createdAt
-									? new Date(createdAt).toLocaleDateString()
+									? new Date(createdAt).toLocaleDateString("en-US", {
+											year: "numeric",
+											month: "short",
+											day: "numeric",
+											timeZone: "UTC",
+										})
 									: "Unknown date"}
 							</p>
 						</div>
