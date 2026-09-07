@@ -1,5 +1,5 @@
-import { ClerkProvider } from "@clerk/tanstack-react-start";
-import { PostHogProvider } from "@posthog/react";
+import { ClerkProvider, useUser } from "@clerk/tanstack-react-start";
+import { PostHogProvider, usePostHog } from "@posthog/react";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import {
@@ -8,6 +8,8 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { useEffect } from "react";
+import { Toaster } from "sonner";
 import { Crosshair, Navbar } from "#/components";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
@@ -45,6 +47,25 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	shellComponent: RootDocument,
 });
 
+function PostHogUserIdentifier() {
+	const { user, isSignedIn } = useUser();
+	const posthog = usePostHog();
+
+	useEffect(() => {
+		const hasAnalyticsConsent = posthog.has_opted_in_capturing();
+
+		if (isSignedIn && user && hasAnalyticsConsent) {
+			posthog.identify(user.id, {
+				name: user.fullName,
+			});
+		} else if (isSignedIn === false) {
+			posthog.reset();
+		}
+	}, [isSignedIn, user, posthog]);
+
+	return null;
+}
+
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
@@ -61,35 +82,35 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						capture_exceptions: true,
 						debug: import.meta.env.DEV,
 						tracing_headers:
-							typeof window !== "undefined"
-								? [window.location.hostname]
-								: [],
+							typeof window !== "undefined" ? [window.location.hostname] : [],
 					}}
 				>
-				<ClerkProvider>
-					<div id="root-layout">
-						<header>
-							<div className="frame">
-								<Navbar />
-								<Crosshair />
-								<Crosshair />
-							</div>
-						</header>
-						<main className="frame">{children}</main>
-					</div>
-					<TanStackDevtools
-						config={{
-							position: "bottom-right",
-						}}
-						plugins={[
-							{
-								name: "Tanstack Router",
-								render: <TanStackRouterDevtoolsPanel />,
-							},
-							TanStackQueryDevtools,
-						]}
-					/>
-				</ClerkProvider>
+					<ClerkProvider>
+						<PostHogUserIdentifier />
+						<div id="root-layout">
+							<header>
+								<div className="frame">
+									<Navbar />
+									<Crosshair />
+									<Crosshair />
+								</div>
+							</header>
+							<main className="frame">{children}</main>
+						</div>
+						<TanStackDevtools
+							config={{
+								position: "bottom-right",
+							}}
+							plugins={[
+								{
+									name: "Tanstack Router",
+									render: <TanStackRouterDevtoolsPanel />,
+								},
+								TanStackQueryDevtools,
+							]}
+						/>
+						<Toaster />
+					</ClerkProvider>
 				</PostHogProvider>
 				<Scripts />
 			</body>
